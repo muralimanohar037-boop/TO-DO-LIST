@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30-Day Daily To-Do List Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .day {
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            text-align: center;
+        }
+        .day h2 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        .summary {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        @media (max-width: 600px) {
+            .calendar {
+                grid-template-columns: 1fr; /* Stack on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>✅ 30-Day Daily To-Do List Tracker</h1>
+
+    <div class="calendar" id="calendar-container">
+        <!-- JavaScript will populate this section -->
+    </div>
+
+    <script>
+        const startDate = new Date('2023-08-11'); // Starting date
+        const daysInMonth = 30;
+        const calendarContainer = document.getElementById('calendar-container');
+
+        // Define tasks for each day of the week
+        const tasks = {
+            0: { // Sunday
+                morning: [
+                    "Drink 1 glass lemon water / coconut water",
+                    "Have a healthy breakfast before college"
+                ],
+                daytime: [
+                    "Use commute/breaks to watch a short tech video or revise aptitude",
+                    "Write down any doubts or topic reminders in a small notebook"
+                ],
+                evening: [
+                    "Do anything useful for career",
+                    "Just take rest for a while"
+                ],
+                night: [
+                    "Wash face with cool water",
+                    "Reflect: recall the day and make improvements",
+                    "Sleep by 10:30–11:00 PM"
+                ]
+            },
+            1: { // Monday
+                morning: [
+                    "Run / exercise (push-ups, squats, planks, skipping) – 45 mins",
+                    "Cool down & stretch – 5 mins"
+                ],
+                daytime: [
+                    "Use commute/breaks to watch a short tech video or revise aptitude",
+                    "Write down any doubts or topic reminders in a small notebook"
+                ],
+                evening: [
+                    "Drink beetroot–carrot juice (150 ml)",
+                    "Solve 2–3 coding problems",
+                    "Improve the attention span on learning"
+                ],
+                night: [
+                    "Wash face with cool water",
+                    "Reflect: recall the day and make improvements",
+                    "Sleep by 10:30–11:00 PM"
+                ]
+            },
+            2: { // Tuesday
+                morning: [
+                    "Run / exercise (push-ups, squats, planks, skipping) – 45 mins",
+                    "Cool down & stretch – 5 mins"
+                ],
+                daytime: [
+                    "Use commute/breaks to watch a short tech video or revise aptitude",
+                    "Write down any doubts or topic reminders in a small notebook"
+                ],
+                evening: [
+                    "Drink beetroot–carrot juice (150 ml)",
+                    "Practice coding and learn new things",
+                    "Revise 1 core subject (python / cloud / DSA theory)"
+                ],
+                night: [
+                    "Wash face with cool water",
+                    "Reflect: recall the day and make improvements",
+                    "Sleep by 10:30–11:00 PM"
+                ]
+            },
+            3: { // Wednesday
+                morning: [
+                    "Run / exercise (push-ups, squats, planks, skipping) – 45 mins",
+                    "Cool down & stretch – 5 mins"
+                ],
+                daytime: [
+                    "Use commute/breaks to watch a short tech video or revise aptitude",
+                    "Write down any doubts or topic reminders in a small notebook"
+                ],
+                evening: [
+                    "Drink beetroot–carrot juice (150 ml)",
+                    "Solve 2–3 coding problems",
+                    "Improve the attention span on learning"
+                ],
+                night: [
+                    "Wash face with cool water",
+                    "Reflect: recall the day and make improvements",
+                    "Sleep by 10:30–11:00 PM"
+                ]
+            },
+            4: { // Thursday
+                morning: [
+                    "Run / exercise (push-ups, squats, planks, skipping) – 45 mins",
+                    "Cool down & stretch – 5 mins"
+                ],
+                daytime: [
+                    "Use commute/breaks to watch a short tech video or revise aptitude",
+                    "Write down any doubts or topic reminders in a small notebook"
+                ],
+                evening: [
+                    "Drink beetroot–carrot juice (150 ml)",
+                    "Practice coding and learn new things",
+                    "Revise 1 core subject (python / cloud / DSA theory)"
+                ],
+                night: [
+                    "Wash face with cool water",
+                    "Reflect: recall the day and make improvements",
+                    "Sleep by 10:30–11:00 PM"
+                ]
+            },
+            5: { // Friday
+                morning: [
+                    "Run / exercise (push-ups, squats, planks, skipping) – 45 mins",
+                    "Cool down & stretch – 5 mins"
+                ],
+                daytime: [
+                    "Use commute/breaks to watch a short tech video or revise aptitude",
+                    "Write down any doubts or topic reminders in a small notebook"
+                ],
+                evening: [
+                    "Drink beetroot–carrot juice (150 ml)",
+                    "Solve 2–3 coding problems",
+                    "Improve the attention span on learning"
+                ],
+                night: [
+                    "Wash face with cool water",
+                    "Reflect: recall the day and make improvements",
+                    "Sleep by 10:30–11:00 PM"
+                ]
+            },
+            6: { // Saturday
+                morning: [
+                    "Run / exercise (push-ups, squats, planks, skipping) – 45 mins",
+                    "Cool down & stretch – 5 mins"
+                ],
+                daytime: [
+                    "Use commute/breaks to watch a short tech video or revise aptitude",
+                    "Write down any doubts or topic reminders in a small notebook"
+                ],
+                evening: [
+                    "Drink beetroot–carrot juice (150 ml)",
+                    "Practice coding and learn new things",
+                    "Revise 1 core subject (python / cloud / DSA theory)"
+                ],
+                night: [
+                    "Wash face with cool water",
+                    "Reflect: recall the day and make improvements",
+                    "Sleep by 10:30–11:00 PM"
+                ]
+            }
+        };
+
+        for (let day = 0; day < daysInMonth; day++) {
+            const currentDate = new Date(startDate);
+            currentDate.setDate(startDate.getDate() + day);
+            const dayOfWeek = currentDate.getDay(); // Get the day of the week (0-6)
+            const dayTasks = tasks[dayOfWeek];
+
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'day';
+            dayDiv.innerHTML = `
+                <h2>${currentDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}</h2>
+                <h3>Morning (5:00–6:00 AM)</h3>
+                ${dayTasks.morning.map((task, index) => `<label><input type="checkbox" aria-label="${task}" data-day="${day}" data-index="${index}" class="task-checkbox"> ${task}</label><br>`).join('')}
+                
+                <h3>Daytime (College Hours)</h3>
+                ${dayTasks.daytime.map((task, index) => `<label><input type="checkbox" aria-label="${task}" data-day="${day}" data-index="${index + dayTasks.morning.length}" class="task-checkbox"> ${task}</label><br>`).join('')}
+                
+                <h3>Evening (6:00–9:00 PM)</h3>
+                ${dayTasks.evening.map((task, index) => `<label><input type="checkbox" aria-label="${task}" data-day="${day}" data-index="${index + dayTasks.morning.length + dayTasks.daytime.length}" class="task-checkbox"> ${task}</label><br>`).join('')}
+                
+                <h3>Night (9:00–10:30 PM)</h3>
+                ${dayTasks.night.map((task, index) => `<label><input type="checkbox" aria-label="${task}" data-day="${day}" data-index="${index + dayTasks.morning.length + dayTasks.daytime.length + dayTasks.evening.length}" class="task-checkbox"> ${task}</label><br>`).join('')}
+                
+                <div class="summary">Tasks Completed: <span class="completed-count">0</span> / ${dayTasks.morning.length + dayTasks.daytime.length + dayTasks.evening.length + dayTasks.night.length}</div>
+            `;
+            calendarContainer.appendChild(dayDiv);
+
+            // Load saved state from local storage
+            const checkboxes = dayDiv.querySelectorAll('.task-checkbox');
+            const completedCount = dayDiv.querySelector('.completed-count');
+
+            checkboxes.forEach((checkbox, index) => {
+                const savedState = localStorage.getItem(`task-${day}-${index}`);
+                if (savedState === 'true') {
+                    checkbox.checked = true;
+                }
+
+                checkbox.addEventListener('change', () => {
+                    const completedTasks = Array.from(checkboxes).filter(cb => cb.checked).length;
+                    completedCount.textContent = completedTasks;
+
+                    // Save the current state to local storage
+                    localStorage.setItem(`task-${day}-${index}`, checkbox.checked);
+                });
+            });
+        }
+    </script>
+
+</body>
+</html>
